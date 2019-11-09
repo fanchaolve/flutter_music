@@ -1,7 +1,14 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/provider/user_provider.dart';
 import 'package:flutter_app/utils/navigator_utils.dart';
+import 'package:flutter_app/widget/net_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../application.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -47,9 +54,21 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin{
 
   }
 
-  void goPage(){
-    print("这里是跳转");
-    NavigatorUtil.goLoginPage(context);
+  void goPage()async{
+    await Application.initSp();
+    UserProvide userProvide = Provider.of<UserProvide>(context);
+    userProvide.initUser();
+    if(userProvide.user != null){
+      await NetUtils.refreshLogin(context).then((value){
+        if(value.data != -1){
+          NavigatorUtil.goHomePage(context);
+        }
+      });
+    }else{
+      NavigatorUtil.goLoginPage(context);
+    }
+
+
   }
 
 

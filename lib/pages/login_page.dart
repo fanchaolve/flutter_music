@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/provider/user_provider.dart';
+import 'package:flutter_app/utils/utils.dart';
+import 'package:flutter_app/widget/common_button.dart';
 import 'package:flutter_app/widget/v_empty_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -92,8 +95,57 @@ class __LoginWidgetState extends State<_LoginWidget> {
   final TextEditingController _phoneController
    = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
+
+
+
+  bool isDelete=false;
+
+  @override
+  void initState() {
+
+   _phoneController.addListener((){
+
+     setState(() {
+       if(_phoneController.text.length>0)
+         isDelete =true;
+        else
+          isDelete =false;
+     });
+
+   });
+    super.initState();
+  }
+
+
+
+
+   InputDecoration _phoneInputDecoration(){
+
+    return InputDecoration(
+      hintText: 'Phone',
+      prefixIcon: Icon(
+        Icons.phone_iphone,
+        color: Colors.green,
+      ),
+      suffixIcon: isDelete?InkWell(
+        child:Icon(
+            Icons.close
+        ),
+        onTap: (){
+          setState(() {
+            _phoneController.clear();
+          });
+        },
+      ):Text(''),
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return Theme(
       data: ThemeData(
         primaryColor: Colors.green
@@ -125,15 +177,9 @@ class __LoginWidgetState extends State<_LoginWidget> {
           ),
           VEmptyView(50),
           TextField(
+            keyboardType:TextInputType.number ,
             controller: _phoneController,
-            decoration: InputDecoration(
-              hintText: 'Phone',
-              prefixIcon: Icon(
-                Icons.phone_iphone,
-                color: Colors.grey,
-
-              )
-            ),
+            decoration: _phoneInputDecoration()
           ),
           VEmptyView(40),
           TextField(
@@ -148,8 +194,27 @@ class __LoginWidgetState extends State<_LoginWidget> {
             ),
           ),
           VEmptyView(120),
-          Consumer(
+          Consumer<UserProvide>(
+            builder: (BuildContext ctx, UserProvide value, Widget child
+            ){
+              return CommonButton(
+                content: 'Login',
+                width: double.infinity,
+                callback: (){
 
+                  String phone =_phoneController.text;
+                  String pwd = _pwdController.text;
+                  print(phone+pwd);
+                  if(phone.isEmpty || pwd.isEmpty){
+                    Utils.showToast('请输入账号或者密码');
+                    return;
+                  }
+
+                  value.login(context, phone, pwd);
+                },
+              );
+
+            }
           )
         ],
       ),

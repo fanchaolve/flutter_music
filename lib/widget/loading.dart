@@ -10,6 +10,8 @@ class Loading {
     if (!isLoading) {
       isLoading = true;
       showGeneralDialog(context: buildContext,
+          barrierDismissible:false,
+          transitionDuration: const Duration(milliseconds: 150),
           pageBuilder: (context, animation, secondaryAnimation) {
         return Align(
           child: ClipRRect(

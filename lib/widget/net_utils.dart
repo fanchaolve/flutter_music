@@ -12,7 +12,7 @@ import '../model/banner.dart' as mBanner;
 class NetUtils{
 
 
-  static final String baseUrl='http://192.168.0.166:3000';
+  static final String baseUrl='http://192.168.0.168:3000';
 
   static Dio _dio;
 

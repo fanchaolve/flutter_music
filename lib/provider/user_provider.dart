@@ -4,7 +4,7 @@ import 'package:flutter_app/application.dart';
 import 'package:flutter_app/model/user.dart';
 import 'package:flutter_app/utils/navigator_utils.dart';
 import 'package:flutter_app/utils/utils.dart';
-import 'package:flutter_app/widget/net_utils.dart';
+import 'package:flutter_app/utils/net_utils.dart';
 import 'dart:convert';
 
 class UserProvide with ChangeNotifier{

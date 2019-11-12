@@ -9,9 +9,12 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(
-        '我的页面'
+      child: Center(
+        child: Text(
+            '我的页面'
+        ),
       ),
+
     );
   }
 }

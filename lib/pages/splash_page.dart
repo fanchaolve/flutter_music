@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/provider/user_provider.dart';
 import 'package:flutter_app/utils/navigator_utils.dart';
-import 'package:flutter_app/widget/net_utils.dart';
+import 'package:flutter_app/utils/net_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 

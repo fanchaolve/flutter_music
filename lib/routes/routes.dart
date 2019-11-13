@@ -9,6 +9,7 @@ class Routes{
   static String root ='/';
   static String login ='/login';
   static String home ='/home';
+  static String songs ='/songs';
 
 
   static void configureRoutes(Router router){
@@ -23,5 +24,6 @@ class Routes{
     router.define(root, handler: splashHandler);
     router.define(login, handler: loginHandler);
     router.define(home, handler: homeHandler);
+    router.define(songs, handler: songHandler);
   }
 }

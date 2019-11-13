@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_app/model/album.dart';
+import 'package:flutter_app/model/daily_songs_data.dart';
 import 'package:flutter_app/model/recommend_data.dart';
 import 'package:flutter_app/model/user.dart';
 import 'package:flutter_app/widget/loading.dart';
@@ -12,7 +13,7 @@ import '../model/banner.dart' as mBanner;
 
 //封装网络请求
 class NetUtils {
-  static final String baseUrl = 'http://192.168.0.163:3000';
+  static final String baseUrl = 'http://192.168.0.181:3000';
 
   static Dio _dio;
 
@@ -74,7 +75,14 @@ class NetUtils {
         'offset': 1,
         'limit': 5,
       }}) async {
-    var response = await _get(context, '/top/album',params: params);
+    var response = await _get(context, '/top/album', params: params);
     return AlbumData.fromJson(response.data);
+  }
+
+  /// 每日推荐歌曲
+  static Future<DailySongsData> getDailySongsData(BuildContext context,
+      {Map<String, dynamic> params}) async {
+    var response = await _get(context, '/recommend/songs');
+    return DailySongsData.fromJson(response.data);
   }
 }

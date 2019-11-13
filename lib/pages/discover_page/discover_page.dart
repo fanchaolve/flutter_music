@@ -2,6 +2,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/album.dart';
 import 'package:flutter_app/model/recommend_data.dart';
+import 'package:flutter_app/utils/navigator_utils.dart';
 import 'package:flutter_app/widget/CustomBanner.dart';
 import 'package:flutter_app/utils/net_utils.dart';
 import 'package:flutter_app/widget/h_empty_view.dart';
@@ -57,6 +58,8 @@ class _DiscoverPageState extends State<DiscoverPage>
           onTap: () {
             switch (index) {
               case 0:
+                NavigatorUtil.goSongs(context);
+                break;
             }
           },
           child: Column(

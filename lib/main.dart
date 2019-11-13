@@ -5,25 +5,26 @@ import 'package:flutter_app/pages/splash_page.dart';
 import 'package:flutter_app/provider/user_provider.dart';
 import 'package:flutter_app/routes/routes.dart';
 import 'package:flutter_app/test.dart';
+import 'package:flutter_app/test2.dart';
 import 'package:flutter_app/utils/net_utils.dart';
 import 'package:provider/provider.dart';
 import 'application.dart';
 
 void main() {
-//  Router router  = Router();
-//  Routes.configureRoutes(router);
-//  Application.router=router;
-//  Application.initSp();
-//  NetUtils.init();
-//
-//  runApp(MultiProvider(
-//    providers: [
-//      ChangeNotifierProvider<UserProvide>.value(value: UserProvide())
-//    ],
-//    child: MyApp(),
-//  ));
+  Router router  = Router();
+  Routes.configureRoutes(router);
+  Application.router=router;
+  Application.initSp();
+  NetUtils.init();
 
-runApp(MyTestapp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<UserProvide>.value(value: UserProvide())
+    ],
+    child: MyApp(),
+  ));
+
+
 
 }
 

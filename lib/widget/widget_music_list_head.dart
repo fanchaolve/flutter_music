@@ -15,12 +15,22 @@ class MusicListHeader extends StatelessWidget implements PreferredSizeWidget {
 
       ),
       child: Container(
-        color: Colors.white,
+        padding: EdgeInsets.symmetric(vertical: 30),
+        color: Colors.green,
+        width: double.infinity,
+
+        child: Text(
+          'fancl111111111',
+          style: TextStyle(
+            fontSize: 33,
+            color: Colors.pink
+          ),
+        ),
       ),
     );
   }
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(ScreenUtil().setWidth(100));
+    Size get preferredSize =>Size.fromHeight(80);
 }

@@ -27,4 +27,8 @@ class NavigatorUtil{
   static void goHomePage(BuildContext context){
     _navigateTo(context, Routes.home,clearStack: true);
   }
+
+  static void goSongs(BuildContext context){
+    _navigateTo(context, Routes.songs,clearStack: true);
+  }
 }

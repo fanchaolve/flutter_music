@@ -9,7 +9,7 @@ class MyTestapp extends StatelessWidget {
           brightness: Brightness.light,
           primaryColor: Colors.white,
           splashColor: Colors.transparent),
-      home: MyPre(),
+      home: MyPre2(),
     );
   }
 }
@@ -24,9 +24,11 @@ class MyPre extends StatelessWidget {
             pinned: true,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('Demo'),
+              title: Text('fancl'),
               background: Image.network(
-                  'https://p0.meituan.net/wedding/b3349e4eac515c277933f6f8cbb06b1650345.jpg%40960w_300h_0e_1l%7Cwatermark%3D0'),
+                  'https://p0.meituan.net/wedding/b3349e4eac515c277933f6f8cbb06b1650345.jpg%40960w_300h_0e_1l%7Cwatermark%3D0',
+                  fit: BoxFit.fitWidth,
+              ),
             ),
           ),
           SliverGrid(
@@ -61,3 +63,35 @@ class MyPre extends StatelessWidget {
     );
   }
 }
+
+
+class MyPre2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: MyPre3(),
+      body: Container(
+        width: 100,
+        height: 100,
+        color: Colors.green,
+
+      ),
+    );
+  }
+}
+
+class MyPre3 extends StatelessWidget implements PreferredSizeWidget{
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.pink,
+      title: Text('fancl'),
+    );
+  }
+
+  @override
+
+  Size get preferredSize => Size(200,300);
+}
+
+

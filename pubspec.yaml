@@ -63,6 +63,7 @@ flutter:
    - images/icon_rank.png
    - images/icon_triangle.png
    - images/bg_daily.png
+   - images/ck.9.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

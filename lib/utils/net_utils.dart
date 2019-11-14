@@ -5,15 +5,18 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_app/model/album.dart';
 import 'package:flutter_app/model/daily_songs_data.dart';
+import 'package:flutter_app/model/mv.dart';
 import 'package:flutter_app/model/recommend_data.dart';
+import 'package:flutter_app/model/top_list.dart';
 import 'package:flutter_app/model/user.dart';
 import 'package:flutter_app/widget/loading.dart';
 import 'package:path_provider/path_provider.dart';
 import '../model/banner.dart' as mBanner;
+import 'custom_log_interceptor.dart';
 
 //封装网络请求
 class NetUtils {
-  static final String baseUrl = 'http://192.168.0.181:3000';
+  static final String baseUrl = 'http://192.168.0.182:3000';
 
   static Dio _dio;
 
@@ -24,7 +27,8 @@ class NetUtils {
     CookieJar cj = PersistCookieJar(dir: tempPath);
     _dio = Dio(BaseOptions(baseUrl: baseUrl))
       ..interceptors.add(CookieManager(cj))
-      ..interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+      ..interceptors
+          .add(CustomLogInterceptor(responseBody: true, requestBody: true));
   }
 
   static Future<Response> _get(BuildContext context, String url,
@@ -33,6 +37,7 @@ class NetUtils {
     try {
       return await _dio.get(url, queryParameters: params);
     } on DioError catch (e) {
+      print('返回错误结果:${e}');
       if (e.response is Map) {
         return Future.value(e.response);
       } else {
@@ -84,5 +89,23 @@ class NetUtils {
       {Map<String, dynamic> params}) async {
     var response = await _get(context, '/recommend/songs');
     return DailySongsData.fromJson(response.data);
+  }
+
+  //排行榜
+  static Future<TopListData> getTopListData(BuildContext context,
+      {Map<String, dynamic> params}) async {
+    var response = await _get(context, '/toplist/detail');
+    print('==>${response.data}');
+    return TopListData.fromJson(response.data);
+  }
+
+  //mv
+  static Future<MVData> getMvTopList(BuildContext context,
+      {Map<String, dynamic> params = const {
+        'offset': 1,
+        'limit': 10,
+      }}) async {
+    var response = await _get(context, '/top/mv', params: params);
+    return MVData.fromJson(response.data);
   }
 }

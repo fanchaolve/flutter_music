@@ -9,7 +9,7 @@ typedef ValueWidgetRequestBuilder<T> = Future<T> Function(BuildContext context,
     {Map<String, dynamic> params});
 
 class CustomSliverFutureBuilder<T> extends StatefulWidget {
-  final ValueWidgetBuilder builder;
+  final ValueWidgetBuilder<T> builder;
   final ValueWidgetRequestBuilder futureFunc;
   final Map<String, dynamic> params;
 

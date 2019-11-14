@@ -53,6 +53,7 @@ class _CustomBannerState extends State<CustomBanner> {
   void dispose() {
     _timer.cancel();
     _timer = null;
+    _pageController.dispose();
     super.dispose();
   }
 

@@ -1,10 +1,13 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/album.dart';
+import 'package:flutter_app/model/mv.dart';
 import 'package:flutter_app/model/recommend_data.dart';
 import 'package:flutter_app/utils/navigator_utils.dart';
+import 'package:flutter_app/utils/utils.dart';
 import 'package:flutter_app/widget/CustomBanner.dart';
 import 'package:flutter_app/utils/net_utils.dart';
+import 'package:flutter_app/widget/common_text_style.dart';
 import 'package:flutter_app/widget/h_empty_view.dart';
 import 'package:flutter_app/widget/v_empty_view.dart';
 import 'package:flutter_app/widget/widget_future_builder.dart';
@@ -19,6 +22,7 @@ class DiscoverPage extends StatefulWidget {
 
 class _DiscoverPageState extends State<DiscoverPage>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+
   void updateKeepAlive() {
     super.updateKeepAlive();
     print('updateKeepAlive');
@@ -59,6 +63,9 @@ class _DiscoverPageState extends State<DiscoverPage>
             switch (index) {
               case 0:
                 NavigatorUtil.goSongs(context);
+                break;
+              case 2:
+                NavigatorUtil.goTopList(context);
                 break;
             }
           },
@@ -119,6 +126,7 @@ class _DiscoverPageState extends State<DiscoverPage>
 
   @override
   Widget build(BuildContext context) {
+    print('discover_page');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -175,7 +183,7 @@ class _DiscoverPageState extends State<DiscoverPage>
             _buildRecommendPlayList(),
             VEmptyView(20),
             _buildNewAlbum(),
-
+            _buildOtherAlbum(),
           ],
         ),
       ),
@@ -241,6 +249,49 @@ class _DiscoverPageState extends State<DiscoverPage>
       },
     );
   }
+  /// 构建新碟上架
+  Widget _buildOtherAlbum() {
+    return CustomFutureBuilder<MVData>(
+      builder: (context,data){
+        return ListView.builder(
+            shrinkWrap: true,
+            itemCount: data.data.length,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context,index){
+              return Container(
+                margin: EdgeInsets.only(left: 10,right: 10,top: 10),
+                width: double.infinity,
+
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      child: Utils.showNetImage(data.data[index].cover),
+                    ),
+                    VEmptyView(5),
+                    Text(
+                      data.data[index].name,
+                      style: commonTextStyle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    VEmptyView(2),
+                    Text(
+                      data.data[index].artistName,
+                      style: smallGrayTextStyle,
+                    )
+
+                  ],
+                ),
+
+              );
+            });
+      },
+      futureFunc: NetUtils.getMvTopList,
+    );
+  }
+
 
   @override
   // TODO: implement wantKeepAlive
@@ -251,4 +302,5 @@ class _DiscoverPageState extends State<DiscoverPage>
     print('didUpdateWidget');
     super.didUpdateWidget(oldWidget);
   }
+
 }

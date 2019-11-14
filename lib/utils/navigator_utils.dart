@@ -28,7 +28,12 @@ class NavigatorUtil{
     _navigateTo(context, Routes.home,clearStack: true);
   }
 
+  //每日推荐
   static void goSongs(BuildContext context){
-    _navigateTo(context, Routes.songs,clearStack: true);
+    _navigateTo(context, Routes.songs);
+  }
+
+  static void goTopList(BuildContext context){
+    _navigateTo(context, Routes.top_list);
   }
 }

@@ -13,12 +13,14 @@ class PlayListAppBarWidget extends StatelessWidget {
   final String backgroundImg;
   final Widget content;
   final double sigma;
+  final int count;
 
   PlayListAppBarWidget({
     @required this.expandedHeight,
     @required this.title,
     @required this.backgroundImg,
     @required this.content,
+    this.count,
     this.sigma = 5
   });
 
@@ -26,16 +28,24 @@ class PlayListAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       centerTitle: true,
+      leading: InkWell(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: Icon(
+          Icons.backspace
+        ),
+      ),
       expandedHeight: expandedHeight,
       pinned: true,
       elevation: 0,
       brightness: Brightness.dark,
-      iconTheme: IconThemeData(color: Colors.green),
+      iconTheme: IconThemeData(color: Colors.white),
       title: Text(
         title,
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
-      bottom: MusicListHeader(),
+      bottom: MusicListHeader(count:count ,),
       flexibleSpace: FlexibleDetailBar(
         content: content,
         background: Stack(

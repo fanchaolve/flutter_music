@@ -10,6 +10,7 @@ class Routes{
   static String login ='/login';
   static String home ='/home';
   static String songs ='/songs';
+  static String top_list='/top_list';
 
 
   static void configureRoutes(Router router){
@@ -25,5 +26,6 @@ class Routes{
     router.define(login, handler: loginHandler);
     router.define(home, handler: homeHandler);
     router.define(songs, handler: songHandler);
+    router.define(top_list, handler: topListHandler);
   }
 }
